@@ -8,7 +8,6 @@ import app.Game;
 public class PlayActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +15,6 @@ public class PlayActivity extends AppCompatActivity {
 
         Game game = new Game();
         //game.start();
-
 
     }
 
