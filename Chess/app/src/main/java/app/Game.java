@@ -5,9 +5,14 @@
 
 package app;
 
+import android.widget.ImageButton;
+
 import java.util.Scanner;
 
 import pieces.*;
+
+import com.example.jar424.chess.PlayActivity;
+import com.example.jar424.chess.R;
 
 /**
  * This class represents our chess game.
@@ -48,10 +53,7 @@ public class Game {
      */
     private boolean drawOffered;
 
-    /**
-     * Scanner for user input.
-     */
-    Scanner sc;
+
 
     /**
      * When a pawn moves two spaces from its starting position, it becomes enpassantable for one turn. This must be accessible to all of the other team's pawns.
@@ -73,8 +75,6 @@ public class Game {
 
         board = new Board();
 
-        sc = new Scanner(System.in);
-
         for(Piece p : white.getPieces()){
             board.set(p, p.getRow(), p.getCol());
         }
@@ -92,36 +92,70 @@ public class Game {
 
         //draw board on screen
 
-        /*
-        System.out.println();
+        for(int row = 7; row >= 0; row--) {
+            for (int col = 0; col < 8; col++) {
 
-        for(int row = 7; row >= 0; row--){
-            for(int col = 0; col < 8; col++){
+                ImageButton b = PlayActivity.getButton(7 - row, col);
 
-                Piece piece = board.get(row, col);
+                int id = pieceToID(row, col);
 
-                if(piece != null){
-                    System.out.print(piece.getName());
-                }else{
-                    int sum = row + col;
-
-                    if(sum % 2 == 0)
-                        System.out.print("##");
-                    else
-                        System.out.print("  ");
+                if(id == -1){
+                    continue;
                 }
 
-                System.out.print(" ");
+                b.setImageResource(id);
+                b.setTag(id);
             }
+        }
+    }
 
-            System.out.print(row+1 + "\n");
+    public int pieceToID(int row, int col){
+
+        Piece p = board.get(row, col);
+
+        if(p instanceof Pawn){
+            if(p.isWhite()){
+                return R.drawable.whitepawn;
+            }else{
+                return R.drawable.blackpawn;
+            }
+        }else if(p instanceof Rook){
+            if(p.isWhite()){
+                return R.drawable.whiterook;
+            }else{
+                return R.drawable.blackrook;
+            }
+        }else if(p instanceof Knight){
+            if(p.isWhite()){
+                return R.drawable.whiteknight;
+            }else{
+                return R.drawable.blackknight;
+            }
+        }else if(p instanceof Bishop){
+            if(p.isWhite()){
+                return R.drawable.whitebishop;
+            }else{
+                return R.drawable.blackbishop;
+            }
+        }else if(p instanceof Queen){
+            if(p.isWhite()){
+                return R.drawable.whitequeen;
+            }else{
+                return R.drawable.blackqueen;
+            }
+        }else if(p instanceof King){
+            if(p.isWhite()){
+                return R.drawable.whiteking;
+            }else{
+                return R.drawable.blackking;
+            }
         }
 
-        System.out.print(" a  b  c  d  e  f  g  h  \n");
+        return -1;
 
-        System.out.println();
-        */
     }
+
+
 
     /**
      * Called to start the game. Contains the game loop. Asks users for input and advances the game accordingly until the game ends.
@@ -188,8 +222,7 @@ public class Game {
                     System.out.print("Black's move: ");
                 }
 
-
-                input = sc.nextLine();
+                input = "";
 
                 firstTry = false;
 
@@ -601,6 +634,10 @@ public class Game {
         }
 
         return true;
+    }
+
+    public Board getBoard(){
+        return board;
     }
 
 }
