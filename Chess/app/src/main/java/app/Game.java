@@ -5,9 +5,14 @@
 
 package app;
 
+import android.widget.ImageButton;
+
 import java.util.Scanner;
 
 import pieces.*;
+
+import com.example.jar424.chess.PlayActivity;
+import com.example.jar424.chess.R;
 
 /**
  * This class represents our chess game.
@@ -92,36 +97,82 @@ public class Game {
 
         //draw board on screen
 
-        /*
-        System.out.println();
+        for(int row = 7; row >= 0; row--) {
+            for (int col = 0; col < 8; col++) {
 
-        for(int row = 7; row >= 0; row--){
-            for(int col = 0; col < 8; col++){
+                ImageButton b = PlayActivity.getButton(7 - row, col);
 
-                Piece piece = board.get(row, col);
-
-                if(piece != null){
-                    System.out.print(piece.getName());
-                }else{
-                    int sum = row + col;
-
-                    if(sum % 2 == 0)
-                        System.out.print("##");
-                    else
-                        System.out.print("  ");
-                }
-
-                System.out.print(" ");
+                b.setImageResource(pieceToID(row, col));
             }
+        }
+    }
 
-            System.out.print(row+1 + "\n");
+    public int pieceToID(int row, int col){
+
+        Piece p = board.get(row, col);
+
+        if(p instanceof Pawn){
+            if(p.isWhite()){
+                return R.drawable.whitepawn;
+            }else{
+                return R.drawable.blackpawn;
+            }
+        }else if(p instanceof Rook){
+            if(p.isWhite()){
+                return R.drawable.whiterook;
+            }else{
+                return R.drawable.blackrook;
+            }
+        }else if(p instanceof Knight){
+            if(p.isWhite()){
+                return R.drawable.whiteknight;
+            }else{
+                return R.drawable.blackknight;
+            }
+        }else if(p instanceof Bishop){
+            if(p.isWhite()){
+                return R.drawable.whitebishop;
+            }else{
+                return R.drawable.blackbishop;
+            }
+        }else if(p instanceof Queen){
+            if(p.isWhite()){
+                return R.drawable.whitequeen;
+            }else{
+                return R.drawable.blackqueen;
+            }
+        }else if(p instanceof King){
+            if(p.isWhite()){
+                return R.drawable.whiteking;
+            }else{
+                return R.drawable.blackking;
+            }
+        }else{
+            //null piece
+            if(row % 2 == 0){
+                //even row
+                if(col % 2 == 0){
+                    //even col
+                    return R.drawable.whitesquare;
+                }else{
+                    //odd col
+                    return R.drawable.blacksquare;
+                }
+            }else{
+                //odd row
+                if(col % 2 == 0){
+                    //even col
+                    return R.drawable.blacksquare;
+                }else{
+                    //odd col
+                    return R.drawable.whitesquare;
+                }
+            }
         }
 
-        System.out.print(" a  b  c  d  e  f  g  h  \n");
-
-        System.out.println();
-        */
     }
+
+
 
     /**
      * Called to start the game. Contains the game loop. Asks users for input and advances the game accordingly until the game ends.
