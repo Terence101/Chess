@@ -2,10 +2,7 @@ package com.example.jar424.chess;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
->>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +56,6 @@ public class PlayActivity extends AppCompatActivity {
             for(int j = 0; j < 8; j++){
 
                 String block = "block" + count;
-<<<<<<< HEAD
 
                 int id = getResources().getIdentifier(block, "id", this.getPackageName());
 
@@ -177,127 +173,6 @@ public class PlayActivity extends AppCompatActivity {
         //buttonPressed.setImageResource(R.drawable.blackking);
     }
 
-=======
-
-                int id = getResources().getIdentifier(block, "id", this.getPackageName());
-
-                buttons[i][j] = (ImageButton)findViewById(id);
-
-                count++;
-            }
-        }
-    }
-
-    public static int getId(String resourceName, Class<?> c) {
-        try {
-            Field idField = c.getDeclaredField(resourceName);
-            return idField.getInt(idField);
-        } catch (Exception e) {
-            throw new RuntimeException("No resource ID found for: "
-                    + resourceName + " / " + c, e);
-        }
-    }
-
-    public void clicked(View v){
-        System.out.println("clicked");
-
-        ImageButton buttonPressed = (ImageButton) findViewById(v.getId());
-
-        for(int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if(buttons[row][col] == buttonPressed){
-
-                    Piece p = game.getBoard().get(row, col);
-
-                    if(firstClick){
-
-                        if(p == null){
-                            openDialog();
-                        }else{
-                            activePiece = p;
-                            activeButton = buttonPressed;
-
-                            firstClick = false;
-
-                            GradientDrawable gd = new GradientDrawable();
-                            gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
-                            gd.setCornerRadius(5);
-                            gd.setStroke(1, 0xFF000000);
-
-                            activeButton.setBackgroundDrawable(gd);
-                        }
-
-                    }else{
-
-                        //deselect piece
-                        if(buttonPressed == activeButton){
-                            activeButton.setBackgroundDrawable(null);
-                            activePiece = null;
-                            activeButton = null;
-                            firstClick = true;
-                            return;
-                        }
-
-                        if(activePiece.isValidMove(game.getBoard(), row, col)){
-                            activePiece.move(game.getBoard(), row, col);
-
-                            //change images
-                            Integer pieceImage = (Integer) activeButton.getTag();
-                            buttonPressed.setImageResource(pieceImage);
-                            buttonPressed.setTag(pieceImage);
-
-                            Integer square;
-
-                            if(row % 2 == 0){
-                                //even row
-                                if(col % 2 == 0){
-                                    //even col
-                                    square = R.drawable.whitesquare;
-                                }else{
-                                    //odd col
-                                    square = R.drawable.blacksquare;
-                                }
-                            }else{
-                                //odd row
-                                if(col % 2 == 0){
-                                    //even col
-                                    square = R.drawable.blacksquare;
-                                }else{
-                                    //odd col
-                                    square = R.drawable.whitesquare;
-                                }
-                            }
-
-                            activeButton.setImageResource(square);
-                            activeButton.setTag(square);
-
-                            activeButton.setBackgroundDrawable(null);
-
-                            activePiece = null;
-                            activeButton = null;
-
-                            firstClick = true;
-
-                        }else{
-                            openDialog();
-                        }
-
-                    }
-
-                    return;
-
-                }
-            }
-        }
-
-
-
-
-
-        //buttonPressed.setImageResource(R.drawable.blackking);
-    }
-
->>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     private void openDialog(){
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
