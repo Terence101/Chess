@@ -7,7 +7,11 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:background="#FFFFFF"
+<<<<<<< HEAD
     android:paddingTop="0dp"
+=======
+    android:paddingTop="32dp"
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     tools:context="com.example.jar424.chess.PlayActivity">
 
 
@@ -20,17 +24,26 @@
         <ImageButton
             android:id="@+id/block1"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:src="@drawable/whitesquare"
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
             android:onClick="clicked"/>
 
 
         <ImageButton
             android:id="@+id/block2"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -38,10 +51,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block3"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -49,10 +71,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block4"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -60,40 +91,73 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block5"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block6"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block7"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block8"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -101,6 +165,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -112,6 +184,7 @@
         <ImageButton
             android:id="@+id/block9"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -119,10 +192,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block10"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -130,10 +212,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block11"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -141,10 +232,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block12"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -152,10 +252,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block13"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -163,10 +272,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block14"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -174,10 +292,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block15"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -185,10 +312,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block16"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -196,6 +332,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -207,6 +351,7 @@
         <ImageButton
             android:id="@+id/block17"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -214,10 +359,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block18"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -225,10 +379,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block19"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -236,10 +399,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block20"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -247,10 +419,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block21"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -258,10 +439,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block22"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -269,10 +459,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block23"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -280,10 +479,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block24"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -291,6 +499,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -302,6 +518,7 @@
         <ImageButton
             android:id="@+id/block25"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -309,10 +526,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block26"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -320,10 +546,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block27"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -331,10 +566,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block28"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -342,10 +586,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block29"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -353,10 +606,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block30"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -364,10 +626,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block31"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -375,10 +646,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block32"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -386,6 +666,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -397,6 +685,7 @@
         <ImageButton
             android:id="@+id/block33"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -404,10 +693,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block34"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -415,10 +713,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block35"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -426,10 +733,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block36"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -437,10 +753,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block37"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -448,10 +773,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block38"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -459,10 +793,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block39"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -470,10 +813,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block40"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -481,6 +833,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -492,6 +852,7 @@
         <ImageButton
             android:id="@+id/block41"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -499,10 +860,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block42"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -510,10 +880,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block43"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -521,10 +900,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block44"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -532,10 +920,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block45"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -543,10 +940,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block46"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -554,10 +960,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block47"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -565,10 +980,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block48"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -576,6 +1000,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -587,6 +1019,7 @@
         <ImageButton
             android:id="@+id/block49"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -594,10 +1027,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block50"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -605,10 +1047,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block51"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -616,10 +1067,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block52"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -627,10 +1087,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block53"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -638,10 +1107,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block54"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -649,10 +1127,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block55"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -660,10 +1147,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block56"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -671,6 +1167,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
             />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare"/>
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
     <TableRow
@@ -682,16 +1186,26 @@
         <ImageButton
             android:id="@+id/block57"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked" />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block58"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -699,20 +1213,38 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block59"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked" />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block60"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -720,20 +1252,38 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block61"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked" />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block62"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -741,10 +1291,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block63"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#eeeed2"
@@ -752,10 +1311,19 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/blacksquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
 
         <ImageButton
             android:id="@+id/block64"
             android:layout_width="0dp"
+<<<<<<< HEAD
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#769656"
@@ -763,6 +1331,14 @@
             android:contentDescription="@string/imageViewDescription"
             android:onClick="clicked"
              />
+=======
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
+            android:src="@drawable/whitesquare" />
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     </TableRow>
 
 </TableLayout>

@@ -98,6 +98,7 @@ public class Game {
                 ImageButton b = PlayActivity.getButton(7 - row, col);
 
                 int id = pieceToID(row, col);
+<<<<<<< HEAD
 
                 if(id == -1){
                     continue;
@@ -111,6 +112,17 @@ public class Game {
 
     public int pieceToID(int row, int col){
 
+=======
+
+                b.setImageResource(id);
+                b.setTag(id);
+            }
+        }
+    }
+
+    public int pieceToID(int row, int col){
+
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
         Piece p = board.get(row, col);
 
         if(p instanceof Pawn){
@@ -149,10 +161,36 @@ public class Game {
             }else{
                 return R.drawable.blackking;
             }
+<<<<<<< HEAD
         }
 
         return -1;
 
+=======
+        }else{
+            //null piece
+            if(row % 2 == 0){
+                //even row
+                if(col % 2 == 0){
+                    //even col
+                    return R.drawable.whitesquare;
+                }else{
+                    //odd col
+                    return R.drawable.blacksquare;
+                }
+            }else{
+                //odd row
+                if(col % 2 == 0){
+                    //even col
+                    return R.drawable.blacksquare;
+                }else{
+                    //odd col
+                    return R.drawable.whitesquare;
+                }
+            }
+        }
+
+>>>>>>> 17d841e9a8ab78024eebcddc7cf5559c4493f9ef
     }
 
 
