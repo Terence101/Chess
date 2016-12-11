@@ -69,6 +69,7 @@
             android:background="#769656"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
              />
 
         <ImageButton
@@ -79,6 +80,7 @@
             android:background="#eeeed2"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
              />
 
         <ImageButton
@@ -89,6 +91,7 @@
             android:background="#769656"
             android:scaleType="centerCrop"
             android:contentDescription="@string/imageViewDescription"
+            android:onClick="clicked"
              />
 
         <ImageButton
