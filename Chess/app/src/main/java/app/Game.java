@@ -53,10 +53,7 @@ public class Game {
      */
     private boolean drawOffered;
 
-    /**
-     * Scanner for user input.
-     */
-    Scanner sc;
+
 
     /**
      * When a pawn moves two spaces from its starting position, it becomes enpassantable for one turn. This must be accessible to all of the other team's pawns.
@@ -77,8 +74,6 @@ public class Game {
         drawOffered = false;
 
         board = new Board();
-
-        sc = new Scanner(System.in);
 
         for(Piece p : white.getPieces()){
             board.set(p, p.getRow(), p.getCol());
@@ -102,7 +97,10 @@ public class Game {
 
                 ImageButton b = PlayActivity.getButton(7 - row, col);
 
-                b.setImageResource(pieceToID(row, col));
+                int id = pieceToID(row, col);
+
+                b.setImageResource(id);
+                b.setTag(id);
             }
         }
     }
@@ -239,8 +237,7 @@ public class Game {
                     System.out.print("Black's move: ");
                 }
 
-
-                input = sc.nextLine();
+                input = "";
 
                 firstTry = false;
 
@@ -652,6 +649,10 @@ public class Game {
         }
 
         return true;
+    }
+
+    public Board getBoard(){
+        return board;
     }
 
 }
