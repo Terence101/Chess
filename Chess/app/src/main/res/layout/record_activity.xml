@@ -12,5 +12,6 @@
         android:text="Playback"
         android:layout_width="161dp"
         android:layout_height="wrap_content"
-        android:id="@+id/playback" />
+        android:id="@+id/playback"
+        android:onClick="playback" />
 </LinearLayout>

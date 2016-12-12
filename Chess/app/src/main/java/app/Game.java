@@ -12,6 +12,7 @@ import java.util.Scanner;
 import pieces.*;
 
 import com.example.jar424.chess.PlayActivity;
+import com.example.jar424.chess.PlaybackActivity;
 import com.example.jar424.chess.R;
 
 /**
@@ -96,6 +97,26 @@ public class Game {
             for (int col = 0; col < 8; col++) {
 
                 ImageButton b = PlayActivity.getButton(7 - row, col);
+
+                int id = pieceToID(row, col);
+
+                if(id == -1){
+                    continue;
+                }
+
+                b.setImageResource(id);
+                b.setTag(id);
+            }
+        }
+    }
+
+    public void playback_Board () {
+        //draw recorded game board on screen
+
+        for(int row = 7; row >= 0; row--) {
+            for (int col = 0; col < 8; col++) {
+
+                ImageButton b = PlaybackActivity.getButton(7 - row, col);
 
                 int id = pieceToID(row, col);
 
@@ -638,6 +659,10 @@ public class Game {
 
     public Board getBoard(){
         return board;
+    }
+
+    public void setBoard(Board b) {
+        board = b;
     }
 
 }
