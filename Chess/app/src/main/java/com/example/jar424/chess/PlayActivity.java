@@ -9,7 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 
@@ -25,6 +28,12 @@ public class PlayActivity extends AppCompatActivity {
     private ImageButton activeButton;
     private Piece activePiece;
     private boolean firstClick;
+    private TextView turnBox;
+    private TextView message;
+    private Button undo;
+    private Button ai;
+    private Button resign;
+    private Button draw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +51,155 @@ public class PlayActivity extends AppCompatActivity {
 
         initializeButtons();
 
+        turnBox = (TextView) findViewById(R.id.turnBox);
+        message = (TextView) findViewById(R.id.message);
+        undo = (Button) findViewById(R.id.undo);
+        ai = (Button) findViewById(R.id.ai);
+        resign = (Button) findViewById(R.id.resign);
+        draw = (Button) findViewById(R.id.draw);
+
         game = new Game();
         game.drawBoard();
 
+        //start();
+
     }
+
+    private void start(){
+
+        while(game.isGameOn()){
+            boolean firstTry = true;
+
+            game.drawBoard();
+
+            do{
+
+                input = "";
+
+                if(!firstTry)
+                    message.setText("Illegal move");
+
+                if(game.isWhiteTurn()){
+                    while(input.split("\\s+").length < 2){
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        //do nothing
+                    }
+
+
+                }else{
+
+                    while(input.split("\\s+").length < 2){
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        //do nothing
+                    }
+
+                }
+
+                firstTry = false;
+
+            }while(!game.takeTurn(input));
+
+            game.setWhiteTurn(!game.isWhiteTurn());
+
+            swapTurnBox();
+        }
+
+        /*
+        public void start(){
+
+            String input;
+
+            while(gameOn){
+
+                boolean firstTry = true;
+
+                drawBoard();
+
+                do{
+
+                    if(!firstTry)
+                        System.out.println("\nIllegal move, try again\n");
+
+                    if(whiteTurn){
+                        if (white.isDefeated()) {
+                            System.out.println("Checkmate");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("\nBlack Wins");
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.exit(0);
+                        }
+
+                        if(white.isChecked()){
+                            System.out.println("Check\n");
+                            white.setChecked(false);
+                        }
+                        System.out.print("White's move: ");
+                    }else{
+                        if(black.isDefeated()){
+                            System.out.println("Checkmate");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("\nWhite Wins");
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.exit(0);
+                        }
+                        if(black.isChecked()){
+                            System.out.println("Check\n");
+                            black.setChecked(false);
+                        }
+                        System.out.print("Black's move: ");
+                    }
+
+                    input = "";
+
+                    firstTry = false;
+
+                }while(!takeTurn(input));
+
+                whiteTurn = !whiteTurn;
+
+
+
+            }
+
+        }
+        */
+
+    }
+
+    private void swapTurnBox() {
+        if(game.isWhiteTurn()) {
+            turnBox.setBackgroundResource(R.drawable.border);
+        }else {
+            turnBox.setBackgroundColor(Color.BLACK);
+        }
+    }
+
 
 
 
@@ -77,21 +231,26 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void clicked(View v){
-        System.out.println("clicked");
+        //System.out.println("clicked");
 
         ImageButton buttonPressed = (ImageButton) findViewById(v.getId());
 
-        for(int row = 0; row < 8; row++) {
+        for(int row = 7; row >= 0; row--) {
             for (int col = 0; col < 8; col++) {
-                if(buttons[row][col] == buttonPressed){
+                if(buttons[7 - row][col] == buttonPressed){
 
                     Piece p = game.getBoard().get(row, col);
 
+                    if(p != null)
+                        System.out.println(p.getName() + "" + p.isWhite());
+
                     if(firstClick){
 
-                        if(p == null){
+                        input = "";
+
+                        if(p == null || (p.isWhite() != game.isWhiteTurn())){
                             openDialog();
-                        }else{
+                        }else {
                             activePiece = p;
                             activeButton = buttonPressed;
 
@@ -99,13 +258,10 @@ public class PlayActivity extends AppCompatActivity {
 
                             activeButton.setColorFilter(Color.BLUE);
 
-                            /*
-                            GradientDrawable gd = new GradientDrawable();
-                            gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
-                            gd.setCornerRadius(5);
-                            gd.setStroke(1, 0xFF000000);
+                            input = input + (char) (col + 97);
+                            input = input + (char) (row + 49) + " ";
+                            System.out.println("input: " + input);
 
-                            activeButton.setBackgroundDrawable(gd);*/
                         }
 
                     }else{
@@ -117,37 +273,29 @@ public class PlayActivity extends AppCompatActivity {
                             activeButton = null;
                             firstClick = true;
 
+                            input = "";
+
                             return;
                         }
 
-                        if(activePiece.isValidMove(game.getBoard(), row, col)){
-                            activePiece.move(game.getBoard(), row, col);
+                        input = input + (char)(col + 97);
+                        input = input + (char) (row + 49) + " ";
+                        System.out.println("input: " + input);
 
+                        if(game.takeTurn(input)){
+
+                            game.drawBoard();
+                            game.setWhiteTurn(!game.isWhiteTurn());
+                            swapTurnBox();
+
+                            /*
                             //change images
                             Integer pieceImage = (Integer) activeButton.getTag();
                             buttonPressed.setImageResource(pieceImage);
                             buttonPressed.setTag(pieceImage);
-
-                            activeButton.setImageResource(0);
-                            activeButton.setTag(0);
+                            */
 
                             activeButton.setColorFilter(null);
-
-                            /*
-                            if(row % 2 == 0){
-                                if(col % 2 == 0){
-                                    activeButton.setBackgroundColor(0x769656);
-                                }else{
-                                    activeButton.setBackgroundColor(0xeeeed2);
-                                }
-                            }else{
-                                if(col % 2 == 0){
-                                    activeButton.setBackgroundColor(0xeeeed2);
-                                }else{
-                                    activeButton.setBackgroundColor(0x769656);
-                                }
-                            }
-                            */
 
                             activePiece = null;
                             activeButton = null;
@@ -155,6 +303,7 @@ public class PlayActivity extends AppCompatActivity {
                             firstClick = true;
 
                         }else{
+                            input = input.substring(0, input.indexOf(" ") + 1);
                             openDialog();
                         }
 
@@ -171,6 +320,28 @@ public class PlayActivity extends AppCompatActivity {
 
 
         //buttonPressed.setImageResource(R.drawable.blackking);
+    }
+
+    public void functionClicked(View v){
+
+        Button buttonPressed = (Button) findViewById(v.getId());
+
+        if(buttonPressed == undo){
+            message.setText("undo");
+        }
+
+        if(buttonPressed == ai){
+            message.setText("ai");
+        }
+
+        if(buttonPressed == resign){
+            message.setText("resign");
+        }
+
+        if(buttonPressed == draw){
+            message.setText("draw");
+        }
+
     }
 
     private void openDialog(){
