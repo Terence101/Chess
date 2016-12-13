@@ -142,7 +142,7 @@ public class Game {
         System.out.println();
     }
 
-    public void playback_board(){
+    public void playback_Board(){
 
         //draw recorded game board on screen
 
