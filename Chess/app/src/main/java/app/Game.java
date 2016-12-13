@@ -101,16 +101,49 @@ public class Game {
                 int id = pieceToID(row, col);
 
                 if(id == -1){
-                    continue;
+                    b.setImageResource(0);
+                    b.setTag(0);
+                }else {
+                    b.setImageResource(id);
+                    b.setTag(id);
                 }
-
-                b.setImageResource(id);
-                b.setTag(id);
             }
         }
+
+        //////////////////////////////////////////////////////////
+
+        //draw board in terminal
+        System.out.println();
+
+        for(int row = 7; row >= 0; row--){
+            for(int col = 0; col < 8; col++){
+
+                Piece piece = board.get(row, col);
+
+                if(piece != null){
+                    System.out.print(piece.getName());
+                }else{
+                    int sum = row + col;
+
+                    if(sum % 2 == 0)
+                        System.out.print("##");
+                    else
+                        System.out.print("  ");
+                }
+
+                System.out.print(" ");
+            }
+
+            System.out.print(row+1 + "\n");
+        }
+
+        System.out.print(" a  b  c  d  e  f  g  h  \n");
+
+        System.out.println();
     }
 
-    public void playback_Board () {
+    public void playback_board(){
+
         //draw recorded game board on screen
 
         for(int row = 7; row >= 0; row--) {
@@ -121,11 +154,12 @@ public class Game {
                 int id = pieceToID(row, col);
 
                 if(id == -1){
-                    continue;
+                    b.setImageResource(0);
+                    b.setTag(0);
+                }else {
+                    b.setImageResource(id);
+                    b.setTag(id);
                 }
-
-                b.setImageResource(id);
-                b.setTag(id);
             }
         }
     }
@@ -661,8 +695,28 @@ public class Game {
         return board;
     }
 
-    public void setBoard(Board b) {
-        board = b;
+    public Player getWhite() {
+        return white;
+    }
+
+    public Player getBlack() {
+        return black;
+    }
+
+    public boolean isGameOn() {
+        return gameOn;
+    }
+
+    public boolean isWhiteTurn() {
+        return whiteTurn;
+    }
+
+    public void setWhiteTurn(boolean whiteTurn){
+        this.whiteTurn = whiteTurn;
+    }
+
+    public boolean isDrawOffered() {
+        return drawOffered;
     }
 
 }
