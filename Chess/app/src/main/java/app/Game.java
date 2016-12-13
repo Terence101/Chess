@@ -86,6 +86,15 @@ public class Game {
 
     }
 
+    public Game(Game game){
+        this.board = game.getBoard();
+        this.white = game.getWhite();
+        this.black = game.getBlack();
+        this.gameOn = game.isGameOn();
+        this.whiteTurn = game.isWhiteTurn();
+        this.drawOffered = game.isDrawOffered();
+    }
+
     /**
      * Function for drawing the board after each turn is made.
      */

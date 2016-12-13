@@ -2,6 +2,7 @@ package com.example.jar424.chess;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -14,10 +15,16 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
+import app.Board;
 import app.Game;
+import app.Player;
 import pieces.Piece;
 
 public class PlayActivity extends AppCompatActivity {
@@ -34,6 +41,7 @@ public class PlayActivity extends AppCompatActivity {
     private Button ai;
     private Button resign;
     private Button draw;
+    private ArrayList<Game> games;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +66,11 @@ public class PlayActivity extends AppCompatActivity {
         resign = (Button) findViewById(R.id.resign);
         draw = (Button) findViewById(R.id.draw);
 
+        games = new ArrayList<Game>();
+
         game = new Game();
         game.drawBoard();
+        games.add(new Game(game));
 
         //start();
 
@@ -249,7 +260,7 @@ public class PlayActivity extends AppCompatActivity {
                         input = "";
 
                         if(p == null || (p.isWhite() != game.isWhiteTurn())){
-                            openDialog();
+                            illegalDialog();
                         }else {
                             activePiece = p;
                             activeButton = buttonPressed;
@@ -288,6 +299,9 @@ public class PlayActivity extends AppCompatActivity {
                             game.setWhiteTurn(!game.isWhiteTurn());
                             swapTurnBox();
 
+                            games.add(new Game(game));
+                            System.out.println(games.size());
+
                             /*
                             //change images
                             Integer pieceImage = (Integer) activeButton.getTag();
@@ -304,7 +318,7 @@ public class PlayActivity extends AppCompatActivity {
 
                         }else{
                             input = input.substring(0, input.indexOf(" ") + 1);
-                            openDialog();
+                            illegalDialog();
                         }
 
                     }
@@ -327,15 +341,18 @@ public class PlayActivity extends AppCompatActivity {
         Button buttonPressed = (Button) findViewById(v.getId());
 
         if(buttonPressed == undo){
-            message.setText("undo");
+            //message.setText("undo");
+            undo();
         }
 
         if(buttonPressed == ai){
-            message.setText("ai");
+            //message.setText("ai");
+            ai();
         }
 
         if(buttonPressed == resign){
-            message.setText("resign");
+            //message.setText("resign");
+            resign();
         }
 
         if(buttonPressed == draw){
@@ -344,14 +361,134 @@ public class PlayActivity extends AppCompatActivity {
 
     }
 
-    private void openDialog(){
+    private void undo(){
+
+        if(games.size() < 2){
+            //can't undo
+            return;
+        }
+
+        games.remove(game);
+
+        game = games.get(games.size() - 1);
+
+        game.drawBoard();
+        swapTurnBox();
+        System.out.println(games.size());
+
+
+    }
+
+    private void resign(){
+
+        if(game.isWhiteTurn()){
+            game.getWhite().setDefeated(true);
+        }else{
+            game.getBlack().setDefeated(true);
+        }
+
+        endDialog();
+
+
+    }
+
+    private void ai(){
+
+        Player p;
+        Random random = new Random();
+        List<Piece> pieces;
+        Piece piece;
+
+        if(game.isWhiteTurn()){
+            p = game.getWhite();
+        }else{
+            p = game.getBlack();
+        }
+
+        pieces = p.getPieces();
+
+
+
+        do{
+
+            input = "";
+
+            //get random piece
+            int x = random.nextInt(pieces.size());
+            piece = pieces.get(x);
+
+            input = input + (char) (piece.getCol() + 97);
+            input = input + (char) (piece.getRow() + 49) + " ";
+
+            //try random spot
+            int row = random.nextInt(8);
+            int col = random.nextInt(8);
+
+            input = input + (char) (col + 97);
+            input = input + (char) (row + 49) + " ";
+
+        }while(!game.takeTurn(input));
+
+        game.drawBoard();
+        game.setWhiteTurn(!game.isWhiteTurn());
+        swapTurnBox();
+        games.add(new Game(game));
+        System.out.println(games.size());
+    }
+
+
+
+    private void endDialog(){
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
         // Setting Dialog Title
-        alertDialog.setTitle("Alert Dialog");
+        alertDialog.setTitle("Game over");
 
         // Setting Dialog Message
-        alertDialog.setMessage("Illegal");
+        if(game.getWhite().isDefeated())
+            alertDialog.setMessage("Black wins!");
+        else if(game.getBlack().isDefeated())
+            alertDialog.setMessage("White wins!");
+        else
+            alertDialog.setMessage("Draw");
+
+
+        // Setting save Button
+        alertDialog.setButton("Save Game", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog,int which)
+            {
+                //save game
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Setting discard button
+        alertDialog.setButton2("Discard Game", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog,int which)
+            {
+                //discard game
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    private void illegalDialog(){
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Illegal move");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Illegal move made. Try again");
 
 
         // Setting OK Button
