@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -476,7 +469,7 @@ public class PlayActivity extends AppCompatActivity {
                     public void run() {
                         finish();;
                     }
-                }, 3000);
+                }, 2000);
             }
         });
 
@@ -530,7 +523,7 @@ public class PlayActivity extends AppCompatActivity {
                     public void run() {
                         finish();;
                     }
-                }, 3000);
+                }, 2000);
 
             }
         });

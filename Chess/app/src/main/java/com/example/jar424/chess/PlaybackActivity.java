@@ -37,16 +37,13 @@ public class PlaybackActivity extends AppCompatActivity {
 
         prevButton = (Button) findViewById(R.id.prev);
         nextButton = (Button) findViewById(R.id.next);
-        prevButton.setBackgroundColor(Color.BLUE);
-        nextButton.setBackgroundColor(Color.BLUE);
 
-        prevButton.setClickable(false);
-        prevButton.setBackgroundColor(Color.GRAY);
+        prevButton.setEnabled(false);
 
         if (moves.size() == 1) {
-            nextButton.setClickable(false);
-            nextButton.setBackgroundColor(Color.GRAY);
+            nextButton.setEnabled(false);
         }
+
         game = new Game();
         game.setBoard(moves.get(curr));
         game.playback_Board();
@@ -88,13 +85,11 @@ public class PlaybackActivity extends AppCompatActivity {
         System.out.println("Previous Move Clicked");
 
         if (curr > 0) {
-            nextButton.setClickable(true);
-            nextButton.setBackgroundColor(Color.BLUE);
+            nextButton.setEnabled(true);
             curr--;
 
             if (curr <= 0) {
-                prevButton.setClickable(false);
-                prevButton.setBackgroundColor(Color.GRAY);
+                prevButton.setEnabled(false);
             }
 
             System.out.println(curr);
@@ -108,13 +103,11 @@ public class PlaybackActivity extends AppCompatActivity {
         System.out.println("Next Move Clicked");
 
         if (curr < moves.size() - 1 ) {
-            prevButton.setClickable(true);
-            prevButton.setBackgroundColor(Color.BLUE);
+            prevButton.setEnabled(true);
             curr++;
 
             if (curr >= moves.size() - 1) {
-                nextButton.setClickable(false);
-                nextButton.setBackgroundColor(Color.GRAY);
+                nextButton.setEnabled(false);
             }
 
             System.out.println(curr);
