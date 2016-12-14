@@ -1,11 +1,16 @@
 package com.example.jar424.chess;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import java.lang.reflect.Field;
+
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 
 import app.Game;
 import app.Board;
@@ -16,7 +21,9 @@ public class PlaybackActivity extends AppCompatActivity {
     private static ImageButton[][] buttons;
     private Game game;
     private int curr;
-    private ArrayList<Board> boards;
+    private ArrayList<Board> moves;
+    private Button prevButton;
+    private Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +31,25 @@ public class PlaybackActivity extends AppCompatActivity {
         setContentView(R.layout.playback_activity);
 
         buttons = new ImageButton[8][8];
-
-        boards = new ArrayList<Board>();
         initializeButtons();
-
+        initializeMoves();
         curr = 0;
 
-        game = new Game();
-        game.playback_Board();
-        boards.add(game.getBoard());
+        prevButton = (Button) findViewById(R.id.prev);
+        nextButton = (Button) findViewById(R.id.next);
+        prevButton.setBackgroundColor(Color.BLUE);
+        nextButton.setBackgroundColor(Color.BLUE);
 
+        prevButton.setClickable(false);
+        prevButton.setBackgroundColor(Color.GRAY);
+
+        if (moves.size() == 1) {
+            nextButton.setClickable(false);
+            nextButton.setBackgroundColor(Color.GRAY);
+        }
+        game = new Game();
+        game.setBoard(moves.get(curr));
+        game.playback_Board();
     }
 
     private void initializeButtons(){
@@ -53,27 +69,63 @@ public class PlaybackActivity extends AppCompatActivity {
         }
     }
 
-    public static int getId(String resourceName, Class<?> c) {
-        try {
-            Field idField = c.getDeclaredField(resourceName);
-            return idField.getInt(idField);
-        } catch (Exception e) {
-            throw new RuntimeException("No resource ID found for: "
-                    + resourceName + " / " + c, e);
-        }
-    }
+    private void initializeMoves () {
+        String file = RecordActivity.getSelected();
 
+        try {
+            FileInputStream fis = openFileInput(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            moves = (ArrayList<Board>) ois.readObject();
+            System.out.println(moves.size());
+            ois.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void prev (View v) {
         System.out.println("Previous Move Clicked");
+
+        if (curr > 0) {
+            nextButton.setClickable(true);
+            nextButton.setBackgroundColor(Color.BLUE);
+            curr--;
+
+            if (curr <= 0) {
+                prevButton.setClickable(false);
+                prevButton.setBackgroundColor(Color.GRAY);
+            }
+
+            System.out.println(curr);
+            game.setBoard(moves.get(curr));
+            game.playback_Board();
+        }
+
     }
 
     public void next (View v) {
         System.out.println("Next Move Clicked");
+
+        if (curr < moves.size() - 1 ) {
+            prevButton.setClickable(true);
+            prevButton.setBackgroundColor(Color.BLUE);
+            curr++;
+
+            if (curr >= moves.size() - 1) {
+                nextButton.setClickable(false);
+                nextButton.setBackgroundColor(Color.GRAY);
+            }
+
+            System.out.println(curr);
+            game.setBoard(moves.get(curr));
+            game.playback_Board();
+        }
     }
 
     public static ImageButton getButton(int row, int col){
         return buttons[row][col];
     }
+
 
 }

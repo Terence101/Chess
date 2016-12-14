@@ -6,6 +6,7 @@
 package app;
 
 import pieces.*;
+import java.io.Serializable;
 
 /**
  * This class represents the board
@@ -14,15 +15,12 @@ import pieces.*;
  * be altered as each move in the game
  * is made.
  */
-public class Board{
+public class Board implements Serializable{
 
     /**
      * 2D array of Pieces. an empty spot is a null Piece.
      */
     private Piece[][] board;
-
-
-
 
     /**
      * No-arg constructor
@@ -84,4 +82,17 @@ public class Board{
     public void remove(int row, int col){
         set(null, row, col);
     }
+
+    public Piece[][] getBoard () {
+        return board;
+    }
+
+    public void copy_values (Piece[][] b){
+        for (int i = 0; i < b.length; i++) {
+            for(int j = 0; j < b[0].length; j++) {
+                board[i][j] = b[i][j];
+            }
+        }
+    }
+
 }

@@ -1,24 +1,34 @@
 package com.example.jar424.chess;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-
+import java.util.ArrayList;
 
 import app.Game;
 import pieces.Piece;
+import app.Board;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -34,6 +44,7 @@ public class PlayActivity extends AppCompatActivity {
     private Button ai;
     private Button resign;
     private Button draw;
+    private static ArrayList<Board> moves;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,7 @@ public class PlayActivity extends AppCompatActivity {
 
         initializeButtons();
 
+        moves = new ArrayList<>();
         turnBox = (TextView) findViewById(R.id.turnBox);
         message = (TextView) findViewById(R.id.message);
         undo = (Button) findViewById(R.id.undo);
@@ -60,7 +72,6 @@ public class PlayActivity extends AppCompatActivity {
 
         game = new Game();
         game.drawBoard();
-
         //start();
 
     }
@@ -249,7 +260,7 @@ public class PlayActivity extends AppCompatActivity {
                         input = "";
 
                         if(p == null || (p.isWhite() != game.isWhiteTurn())){
-                            openDialog();
+                            openDialog("Illegal Move");
                         }else {
                             activePiece = p;
                             activeButton = buttonPressed;
@@ -283,7 +294,6 @@ public class PlayActivity extends AppCompatActivity {
                         System.out.println("input: " + input);
 
                         if(game.takeTurn(input)){
-
                             game.drawBoard();
                             game.setWhiteTurn(!game.isWhiteTurn());
                             swapTurnBox();
@@ -304,7 +314,7 @@ public class PlayActivity extends AppCompatActivity {
 
                         }else{
                             input = input.substring(0, input.indexOf(" ") + 1);
-                            openDialog();
+                            openDialog("Illegal Move");
                         }
 
                     }
@@ -314,10 +324,6 @@ public class PlayActivity extends AppCompatActivity {
                 }
             }
         }
-
-
-
-
 
         //buttonPressed.setImageResource(R.drawable.blackking);
     }
@@ -336,30 +342,33 @@ public class PlayActivity extends AppCompatActivity {
 
         if(buttonPressed == resign){
             message.setText("resign");
+            resign();
         }
 
         if(buttonPressed == draw){
             message.setText("draw");
+            draw();
         }
 
     }
 
-    private void openDialog(){
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    private void openDialog(String s){
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
         // Setting Dialog Title
         alertDialog.setTitle("Alert Dialog");
 
         // Setting Dialog Message
-        alertDialog.setMessage("Illegal");
+        alertDialog.setMessage(s);
 
 
         // Setting OK Button
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog,int which)
             {
-
+                alertDialog.dismiss();
+                System.out.println("Error acknowledged");
             }
         });
 
@@ -368,9 +377,190 @@ public class PlayActivity extends AppCompatActivity {
     }
 
 
+    private void resign () {
+        input = "resign";
+
+        if (game.takeTurn(input)) {
+
+            if (game.isWhiteTurn()) {
+                resultDialog("White resigns");
+            } else {
+                resultDialog("Black resigns");
+            }
+        }
+    }
+
+    private void draw () {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Draw Offered");
+
+        // Setting Dialog Message
+        if(game.isWhiteTurn())
+            alertDialog.setMessage("White offers draw. \nDo you accept draw?");
+        else
+            alertDialog.setMessage("Black offers draw. \nDo you accept draw?");
+
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Yes", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog,int which)
+            {
+                alertDialog.dismiss();
+                resultDialog("Game ended in a draw");
+            }
+        });
+
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"No", new DialogInterface.OnClickListener() {
+            public void onClick (DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+                openDialog("Draw refused");
+            }
+        });
+
+        alertDialog.show();
+    }
+
+    private void resultDialog (String s) {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Game Result");
+
+        // Setting Dialog Message
+        alertDialog.setMessage(s);
+
+
+        // Setting OK Button
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog,int which)
+            {
+                alertDialog.dismiss();
+
+                System.out.println("Game ended");
+                save();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+
+    }
+
+    private void save () {
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Record Game?");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Would you like to save this game?");
+
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"Yes", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog,int which)
+            {
+                alertDialog.dismiss();
+
+                save_game();
+            }
+        });
+
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE,"No", new DialogInterface.OnClickListener() {
+            public void onClick (DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        finish();;
+                    }
+                }, 3000);
+            }
+        });
+
+        alertDialog.show();
+
+    }
+
+    private void save_game () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Title");
+
+        final String[] text = new String[1];
+
+        final EditText title = new EditText(this);
+        title.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(title);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                text[0] = title.getText().toString();
+                System.out.println(text[0]);
+
+                if (text[0] == null || text[0].equals("")) {
+                    openDialog("Invalid Name");
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            save_game();;
+                        }
+                    }, 5000);
+
+                } else {
+                    writeTofile(text[0]);
+                }
+
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        finish();;
+                    }
+                }, 3000);
+
+            }
+        });
+
+        builder.show();
+    }
+
+    private void writeTofile (String file_name) {
+        FileOutputStream fos;
+        ObjectOutputStream oos;
+
+        try {
+            fos = openFileOutput(file_name, Context.MODE_PRIVATE);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(moves);
+            oos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
     public static ImageButton getButton(int row, int col){
         return buttons[row][col];
+    }
+
+    public static ArrayList<Board> getMoves () {
+        return moves;
     }
 
 }

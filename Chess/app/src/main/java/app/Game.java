@@ -22,7 +22,7 @@ import com.example.jar424.chess.R;
  * function to draw the board.
  *
  */
-public class Game {
+public class Game{
 
     /**
      * The board for our game.
@@ -91,8 +91,11 @@ public class Game {
      */
     public void drawBoard(){
 
-        //draw board on screen
+        Board temp = new Board ();
+        temp.copy_values(board.getBoard());
+        PlayActivity.getMoves().add(temp);
 
+        //draw board on screen
         for(int row = 7; row >= 0; row--) {
             for (int col = 0; col < 8; col++) {
 
@@ -162,7 +165,37 @@ public class Game {
                 }
             }
         }
+
+        //draw board in terminal
+        System.out.println();
+
+        for(int row = 7; row >= 0; row--){
+            for(int col = 0; col < 8; col++){
+
+                Piece piece = board.get(row, col);
+
+                if(piece != null){
+                    System.out.print(piece.getName());
+                }else{
+                    int sum = row + col;
+
+                    if(sum % 2 == 0)
+                        System.out.print("##");
+                    else
+                        System.out.print("  ");
+                }
+
+                System.out.print(" ");
+            }
+
+            System.out.print(row+1 + "\n");
+        }
+
+        System.out.print(" a  b  c  d  e  f  g  h  \n");
+
+        System.out.println();
     }
+
 
     public int pieceToID(int row, int col){
 
@@ -313,16 +346,6 @@ public class Game {
 
                 else
                     System.out.println("\nWhite Wins");
-
-
-                try {
-                    Thread.sleep(2000);
-                    System.exit(0);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
 
                 return true;
             }
@@ -693,6 +716,10 @@ public class Game {
 
     public Board getBoard(){
         return board;
+    }
+
+    public void setBoard (Board b) {
+        board = b;
     }
 
     public Player getWhite() {

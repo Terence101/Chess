@@ -6,7 +6,7 @@
 package pieces;
 
 import app.Board;
-
+import java.io.Serializable;
 /**
  *
  * This is our abstract class for a Piece.
@@ -14,7 +14,7 @@ import app.Board;
  * extend this class and have its own implementation.
  *
  */
-public abstract class Piece {
+public abstract class Piece implements Serializable {
 
     /**
      * Each piece has a name value that is used for printing the board in the console.
