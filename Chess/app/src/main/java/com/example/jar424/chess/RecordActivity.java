@@ -15,7 +15,9 @@ import android.widget.Switch;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -27,7 +29,7 @@ public class RecordActivity extends AppCompatActivity {
     private ListView list;
     private Switch sort;
     private static String s;
-    private String[] files;
+    private ArrayList<String> files;
     private boolean sortByName;
     private ArrayAdapter adapter;
 
@@ -42,15 +44,18 @@ public class RecordActivity extends AppCompatActivity {
         sort = (Switch) findViewById(R.id.sort);
         sort.setText("Sort by Name");
 
+        if (files == null || files.size() < 1)
+            sort.setEnabled(false);
+
         sortByName = false;
     }
 
     private void initialize_list () {
         list = (ListView) findViewById(R.id.listview);
-        files = fileList();
-        files = Arrays.copyOfRange(files, 1, files.length);
+        files = new ArrayList<>(Arrays.asList(fileList()));
+        files.remove(0);
 
-        if (files == null)
+        if (files == null || files.size() < 1)
             return;
 
 
@@ -59,14 +64,27 @@ public class RecordActivity extends AppCompatActivity {
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-                s = (String) list.getItemAtPosition(position);
-                adapter.getChildAt(position).setBackgroundColor(Color.LTGRAY);
-                System.out.println(s);
+
+                String temp = (String) list.getItemAtPosition(position);
+
+                if (s != null) {
+                    if (temp.equals(s)) {
+                        adapter.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
+                        s = null;
+                    }
+                } else {
+                    s = temp;
+                    adapter.getChildAt(position).setBackgroundColor(Color.LTGRAY);
+                }
             }
         });
     }
 
     public void switchSort(View v){
+
+        if ( s == null)
+            return;
+
         sortByName = !sortByName;
 
         if(sortByName){
@@ -78,7 +96,7 @@ public class RecordActivity extends AppCompatActivity {
 
     private void sortByDate(){
 
-        String o1 = files[0];
+        String o1 = files.get(0);
 
         String date1 = o1.substring(o1.lastIndexOf("\t") + 1);
         System.out.println(date1);
@@ -97,7 +115,7 @@ public class RecordActivity extends AppCompatActivity {
 
     private void sortByName(){
 
-        Arrays.sort(files);
+        Collections.sort(files);
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
         adapter.notifyDataSetChanged();
         list.setAdapter(adapter);
@@ -136,6 +154,25 @@ public class RecordActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, PlaybackActivity.class);
         startActivity(intent);
+    }
+
+    public void remove (View v) {
+
+        if (s == null) {
+            openDialog("No Game selected");
+            return;
+        }
+
+        deleteFile(s);
+        files.remove(s);
+        s = null;
+
+        if (files == null || files.size() < 1)
+            sort.setEnabled(false);
+
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
+        adapter.notifyDataSetChanged();
+        list.setAdapter(adapter);
     }
 
     public static String getSelected () {

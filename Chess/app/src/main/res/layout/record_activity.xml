@@ -6,7 +6,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="388dp"
         android:id="@+id/listview" />
 
     <Switch
@@ -18,10 +18,31 @@
         android:checked="false"
         android:onClick="switchSort" />
 
-    <Button
-        android:text="Playback"
-        android:layout_width="161dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/playback"
-        android:onClick="playback" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="Playback"
+            android:layout_width="161dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/playback"
+            android:onClick="playback"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="Remove"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/remove"
+            android:onClick="remove"
+            android:layout_alignBaseline="@+id/playback"
+            android:layout_alignBottom="@+id/playback"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
 </LinearLayout>
