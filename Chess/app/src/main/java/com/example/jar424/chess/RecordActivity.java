@@ -15,6 +15,8 @@ import android.widget.Switch;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,16 +40,17 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_activity);
 
-        initialize_list();
-        s = null;
-
         sort = (Switch) findViewById(R.id.sort);
         sort.setText("Sort by Name");
+
+        initialize_list();
+        s = null;
 
         if (files == null || files.size() < 1)
             sort.setEnabled(false);
 
         sortByName = false;
+
     }
 
     private void initialize_list () {
@@ -58,6 +61,9 @@ public class RecordActivity extends AppCompatActivity {
         if (files == null || files.size() < 1)
             return;
 
+        sort.setEnabled(true);
+
+        sortByDate();
 
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
         list.setAdapter(adapter);
@@ -82,9 +88,6 @@ public class RecordActivity extends AppCompatActivity {
 
     public void switchSort(View v){
 
-        if ( s == null)
-            return;
-
         sortByName = !sortByName;
 
         if(sortByName){
@@ -92,33 +95,51 @@ public class RecordActivity extends AppCompatActivity {
         }else{
             sortByDate();
         }
+
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
+        adapter.notifyDataSetChanged();
+        list.setAdapter(adapter);
     }
 
     private void sortByDate(){
 
-        String o1 = files.get(0);
-
-        String date1 = o1.substring(o1.lastIndexOf("\t") + 1);
-        System.out.println(date1);
-
-        /*
-        Arrays.sort(files, new Comparator<String>() {
+        Collections.sort(files, new Comparator<String>() {
             @Override
-            public int compare(String o1, String o2) {
+            public int compare(String s1, String s2) {
 
-                String date1 = o1.substring(o1.lastIndexOf("/t"));
+                String dateString1 = s1.substring(s1.lastIndexOf("\t") + 1);
+                String dateString2 = s2.substring(s2.lastIndexOf("\t") + 1);
+
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+
+                Date date1 = null;
+                try {
+                    date1 = format.parse(dateString1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Date date2 = null;
+                try {
+                    date2 = format.parse(dateString2);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if (date1.compareTo(date2) <= 0) {
+                    return -1;
+                }else{
+                    return 1;
+                }
+
 
             }
-        }
-        */
+        });
+
     }
 
     private void sortByName(){
 
         Collections.sort(files);
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
-        adapter.notifyDataSetChanged();
-        list.setAdapter(adapter);
 
     }
 

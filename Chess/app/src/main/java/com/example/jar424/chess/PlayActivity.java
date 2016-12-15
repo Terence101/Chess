@@ -254,7 +254,7 @@ public class PlayActivity extends AppCompatActivity {
                         input = "";
 
                         if(p == null || (p.isWhite() != game.isWhiteTurn())){
-                            openDialog("Illegal Move");
+                            openDialog("Invalid piece");
                         }else {
                             activePiece = p;
                             activeButton = buttonPressed;
@@ -296,14 +296,8 @@ public class PlayActivity extends AppCompatActivity {
                             swapTurnBox();
 
                             games.add(g);
-                            //System.out.println(games.size());
 
-                            /*
-                            //change images
-                            Integer pieceImage = (Integer) activeButton.getTag();
-                            buttonPressed.setImageResource(pieceImage);
-                            buttonPressed.setTag(pieceImage);
-                            */
+                            checkForCheck();
 
                             activeButton.setColorFilter(null);
 
@@ -367,6 +361,32 @@ public class PlayActivity extends AppCompatActivity {
 
         game.drawBoard();
         swapTurnBox();
+
+
+
+        if ( !game.isWhiteTurn()) {
+            int x = game.getBlack().getKing().getRow();
+            int y = game.getBlack().getKing().getCol();
+
+            for (Piece p: game.getWhite().getPieces()) {
+                if ( p.isValidMove(game.getBoard(), x, y) ) {
+                    game.getBlack().setChecked(true);
+                }
+            }
+        } else {
+            int x = game.getWhite().getKing().getRow();
+            int y = game.getWhite().getKing().getCol();
+
+            for (Piece p: game.getBlack().getPieces()) {
+                if ( p.isValidMove(game.getBoard(), x, y) ) {
+                    game.getWhite().setChecked(true);
+                }
+            }
+        }
+
+
+
+        checkForCheck();
         //System.out.println(games.size());
         //System.out.println(game.isWhiteTurn());
 
@@ -414,7 +434,30 @@ public class PlayActivity extends AppCompatActivity {
         game.setWhiteTurn(!game.isWhiteTurn());
         swapTurnBox();
         games.add(g);
-        System.out.println(games.size());
+
+        checkForCheck();
+
+        //System.out.println(games.size());
+    }
+
+    private void checkForCheck(){
+        if(game.getWhite().isDefeated()){
+            resultDialog("Checkmate! Black wins");
+        }
+
+        if(game.getBlack().isDefeated()){
+            resultDialog("Checkmate! White wins");
+        }
+
+        if(game.getWhite().isChecked() || game.getBlack().isChecked()){
+            message.setText("Check");
+        }else{
+            message.setText("");
+        }
+
+        //reset checks
+        game.getWhite().setChecked(false);
+        game.getBlack().setChecked(false);
     }
 
     private void openDialog(String s){
@@ -568,7 +611,7 @@ public class PlayActivity extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
                 String formattedDate = sdf.format(date);
 
-                text[0] = title.getText().toString() + "\t\t\t" + formattedDate;
+                text[0] = title.getText().toString() + "\t\t\t\t\t\t\t" + formattedDate;
                 System.out.println(text[0]);
 
                 if (text[0] == null || text[0].equals("")) {

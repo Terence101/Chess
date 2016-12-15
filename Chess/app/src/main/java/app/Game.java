@@ -86,11 +86,16 @@ public class Game{
 
     }
 
+    //make copy of game
     public Game(Game game){
 
         this.board = new Board();
 
         this.white = new Player(true);
+
+        this.white.getPieces().clear();
+        this.white.setKing(game.getWhite().getKing());
+        this.white.setChecked(game.getWhite().isChecked());
 
         for(Piece p : game.getWhite().getPieces()){
             Piece p2 = copyPiece(p);
@@ -99,6 +104,10 @@ public class Game{
         }
 
         this.black = new Player(false);
+
+        this.black.getPieces().clear();
+        this.black.setKing(game.getBlack().getKing());
+        this.black.setChecked(game.getBlack().isChecked());
 
         for(Piece p : game.getBlack().getPieces()){
             Piece p2 = copyPiece(p);
