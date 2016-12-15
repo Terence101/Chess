@@ -87,22 +87,60 @@ public class Game{
     }
 
     public Game(Game game){
-        this.board = game.getBoard();
-        this.white = game.getWhite();
-        this.black = game.getBlack();
+
+        this.board = new Board();
+
+        this.white = new Player(true);
+
+        for(Piece p : game.getWhite().getPieces()){
+            Piece p2 = copyPiece(p);
+            this.white.getPieces().add(p2);
+            //this.board.set(p2, p2.getRow(), p2.getCol());
+        }
+
+        this.black = new Player(false);
+
+        for(Piece p : game.getBlack().getPieces()){
+            Piece p2 = copyPiece(p);
+            this.black.getPieces().add(p2);
+            //this.board.set(p2, p2.getRow(), p2.getCol());
+        }
+
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(game.getBoard().get(i, j) != null) {
+                    this.board.set(copyPiece(game.getBoard().get(i, j)), i, j);
+                }
+            }
+        }
+
+
+
         this.gameOn = game.isGameOn();
         this.whiteTurn = game.isWhiteTurn();
         this.drawOffered = game.isDrawOffered();
+    }
+
+    private Piece copyPiece(Piece p){
+        if(p instanceof Pawn){
+            return new Pawn(p.isWhite(), p.getRow(), p.getCol());
+        }else if(p instanceof Rook) {
+            return new Rook(p.isWhite(), p.getRow(), p.getCol());
+        }else if(p instanceof Knight) {
+            return new Knight(p.isWhite(), p.getRow(), p.getCol());
+        }else if(p instanceof Bishop) {
+            return new Bishop(p.isWhite(), p.getRow(), p.getCol());
+        }else if(p instanceof Queen) {
+            return new Queen(p.isWhite(), p.getRow(), p.getCol());
+        }else{
+            return new King(p.isWhite(), p.getRow(), p.getCol());
+        }
     }
 
     /**
      * Function for drawing the board after each turn is made.
      */
     public void drawBoard(){
-
-        Board temp = new Board ();
-        temp.copy_values(board.getBoard());
-        PlayActivity.getMoves().add(temp);
 
         //draw board on screen
         for(int row = 7; row >= 0; row--) {
@@ -124,6 +162,37 @@ public class Game{
 
         //////////////////////////////////////////////////////////
 
+        //draw board in terminal
+        System.out.println();
+
+        for(int row = 7; row >= 0; row--){
+            for(int col = 0; col < 8; col++){
+
+                Piece piece = board.get(row, col);
+
+                if(piece != null){
+                    System.out.print(piece.getName());
+                }else{
+                    int sum = row + col;
+
+                    if(sum % 2 == 0)
+                        System.out.print("##");
+                    else
+                        System.out.print("  ");
+                }
+
+                System.out.print(" ");
+            }
+
+            System.out.print(row+1 + "\n");
+        }
+
+        System.out.print(" a  b  c  d  e  f  g  h  \n");
+
+        System.out.println();
+    }
+
+    public void drawBoardTerminal(){
         //draw board in terminal
         System.out.println();
 
