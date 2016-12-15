@@ -17,9 +17,14 @@ import android.widget.TextView;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import app.Game;
+import app.Player;
 import pieces.Piece;
 import app.Board;
 
@@ -38,6 +43,8 @@ public class PlayActivity extends AppCompatActivity {
     private Button resign;
     private Button draw;
     private static ArrayList<Board> moves;
+    private ArrayList<Game> games;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +70,11 @@ public class PlayActivity extends AppCompatActivity {
         resign = (Button) findViewById(R.id.resign);
         draw = (Button) findViewById(R.id.draw);
 
+        games = new ArrayList<Game>();
+
         game = new Game();
         game.drawBoard();
+        //games.add(new Game(game));
         //start();
 
     }
@@ -224,15 +234,6 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    public static int getId(String resourceName, Class<?> c) {
-        try {
-            Field idField = c.getDeclaredField(resourceName);
-            return idField.getInt(idField);
-        } catch (Exception e) {
-            throw new RuntimeException("No resource ID found for: "
-                    + resourceName + " / " + c, e);
-        }
-    }
 
     public void clicked(View v){
         //System.out.println("clicked");
@@ -286,10 +287,16 @@ public class PlayActivity extends AppCompatActivity {
                         input = input + (char) (row + 49) + " ";
                         System.out.println("input: " + input);
 
+                        Game g = new Game(game);
+                        //g.drawBoardTerminal();
+
                         if(game.takeTurn(input)){
                             game.drawBoard();
                             game.setWhiteTurn(!game.isWhiteTurn());
                             swapTurnBox();
+
+                            games.add(g);
+                            //System.out.println(games.size());
 
                             /*
                             //change images
@@ -326,23 +333,88 @@ public class PlayActivity extends AppCompatActivity {
         Button buttonPressed = (Button) findViewById(v.getId());
 
         if(buttonPressed == undo){
-            message.setText("undo");
+            //message.setText("undo");
+            undo();
         }
 
         if(buttonPressed == ai){
-            message.setText("ai");
+            //message.setText("ai");
+            ai();
         }
 
         if(buttonPressed == resign){
-            message.setText("resign");
+            //message.setText("resign");
             resign();
         }
 
         if(buttonPressed == draw){
-            message.setText("draw");
+            //message.setText("draw");
             draw();
         }
 
+    }
+
+    private void undo(){
+
+        if(games.size() < 1){
+            //can't undo
+            return;
+        }
+
+        game = games.get(games.size() - 1);
+
+        games.remove(games.size() - 1);
+
+        game.drawBoard();
+        swapTurnBox();
+        //System.out.println(games.size());
+        //System.out.println(game.isWhiteTurn());
+
+
+    }
+
+    private void ai(){
+
+        Player p;
+        Random random = new Random();
+        List<Piece> pieces;
+        Piece piece;
+
+        if(game.isWhiteTurn()){
+            p = game.getWhite();
+        }else{
+            p = game.getBlack();
+        }
+
+        pieces = p.getPieces();
+
+        Game g = new Game(game);
+
+        do{
+
+            input = "";
+
+            //get random piece
+            int x = random.nextInt(pieces.size());
+            piece = pieces.get(x);
+
+            input = input + (char) (piece.getCol() + 97);
+            input = input + (char) (piece.getRow() + 49) + " ";
+
+            //try random spot
+            int row = random.nextInt(8);
+            int col = random.nextInt(8);
+
+            input = input + (char) (col + 97);
+            input = input + (char) (row + 49) + " ";
+
+        }while(!game.takeTurn(input));
+
+        game.drawBoard();
+        game.setWhiteTurn(!game.isWhiteTurn());
+        swapTurnBox();
+        games.add(g);
+        System.out.println(games.size());
     }
 
     private void openDialog(String s){
@@ -492,7 +564,11 @@ public class PlayActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
 
-                text[0] = title.getText().toString();
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                String formattedDate = sdf.format(date);
+
+                text[0] = title.getText().toString() + "\t\t\t" + formattedDate;
                 System.out.println(text[0]);
 
                 if (text[0] == null || text[0].equals("")) {
@@ -506,6 +582,7 @@ public class PlayActivity extends AppCompatActivity {
                     }, 5000);
 
                 } else {
+                    System.out.println("writing to file");
                     writeTofile(text[0]);
                 }
 
@@ -535,6 +612,12 @@ public class PlayActivity extends AppCompatActivity {
         FileOutputStream fos;
         ObjectOutputStream oos;
 
+        for(Game g : games){
+            moves.add(g.getBoard());
+        }
+
+        moves.add(game.getBoard());
+
         try {
             fos = openFileOutput(file_name, Context.MODE_PRIVATE);
             oos = new ObjectOutputStream(fos);
@@ -550,10 +633,6 @@ public class PlayActivity extends AppCompatActivity {
 
     public static ImageButton getButton(int row, int col){
         return buttons[row][col];
-    }
-
-    public static ArrayList<Board> getMoves () {
-        return moves;
     }
 
 }
