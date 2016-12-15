@@ -9,9 +9,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.FileOutputStream;
@@ -25,8 +27,13 @@ import java.util.Random;
 
 import app.Game;
 import app.Player;
+import pieces.Bishop;
+import pieces.Knight;
+import pieces.Pawn;
 import pieces.Piece;
 import app.Board;
+import pieces.Queen;
+import pieces.Rook;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -291,6 +298,12 @@ public class PlayActivity extends AppCompatActivity {
                         //g.drawBoardTerminal();
 
                         if(game.takeTurn(input)){
+
+                            //promotion
+                            if(activePiece instanceof Pawn && (row == 7 || row == 0) ){
+                                promotionDialog();
+                            }
+
                             game.drawBoard();
                             game.setWhiteTurn(!game.isWhiteTurn());
                             swapTurnBox();
@@ -364,28 +377,6 @@ public class PlayActivity extends AppCompatActivity {
 
 
 
-        if ( !game.isWhiteTurn()) {
-            int x = game.getBlack().getKing().getRow();
-            int y = game.getBlack().getKing().getCol();
-
-            for (Piece p: game.getWhite().getPieces()) {
-                if ( p.isValidMove(game.getBoard(), x, y) ) {
-                    game.getBlack().setChecked(true);
-                }
-            }
-        } else {
-            int x = game.getWhite().getKing().getRow();
-            int y = game.getWhite().getKing().getCol();
-
-            for (Piece p: game.getBlack().getPieces()) {
-                if ( p.isValidMove(game.getBoard(), x, y) ) {
-                    game.getWhite().setChecked(true);
-                }
-            }
-        }
-
-
-
         checkForCheck();
         //System.out.println(games.size());
         //System.out.println(game.isWhiteTurn());
@@ -399,6 +390,9 @@ public class PlayActivity extends AppCompatActivity {
         Random random = new Random();
         List<Piece> pieces;
         Piece piece;
+
+        int row;
+        int col;
 
         if(game.isWhiteTurn()){
             p = game.getWhite();
@@ -422,13 +416,22 @@ public class PlayActivity extends AppCompatActivity {
             input = input + (char) (piece.getRow() + 49) + " ";
 
             //try random spot
-            int row = random.nextInt(8);
-            int col = random.nextInt(8);
+            row = random.nextInt(8);
+            col = random.nextInt(8);
 
             input = input + (char) (col + 97);
             input = input + (char) (row + 49) + " ";
 
         }while(!game.takeTurn(input));
+
+        activePiece = piece;
+
+        //promotion
+        if(piece instanceof Pawn && (row == 7 || row == 0) ){
+            promotionDialog();
+        }
+
+        activePiece = null;
 
         game.drawBoard();
         game.setWhiteTurn(!game.isWhiteTurn());
@@ -449,11 +452,33 @@ public class PlayActivity extends AppCompatActivity {
             resultDialog("Checkmate! White wins");
         }
 
+        if ( !game.isWhiteTurn()) {
+            int x = game.getBlack().getKing().getRow();
+            int y = game.getBlack().getKing().getCol();
+
+            for (Piece p: game.getWhite().getPieces()) {
+                if ( p.isValidMove(game.getBoard(), x, y) ) {
+                    game.getBlack().setChecked(true);
+                }
+            }
+        } else {
+            int x = game.getWhite().getKing().getRow();
+            int y = game.getWhite().getKing().getCol();
+
+            for (Piece p: game.getBlack().getPieces()) {
+                if ( p.isValidMove(game.getBoard(), x, y) ) {
+                    game.getWhite().setChecked(true);
+                }
+            }
+        }
+
         if(game.getWhite().isChecked() || game.getBlack().isChecked()){
             message.setText("Check");
         }else{
             message.setText("");
         }
+
+
 
         //reset checks
         game.getWhite().setChecked(false);
@@ -527,6 +552,47 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
+    }
+
+    private void promotionDialog() {
+
+        final boolean isWhite = activePiece.isWhite();
+        final int row = activePiece.getRow();
+        final int col = activePiece.getCol();
+
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setTitle("Select a piece for promotion");
+        String[] items = {"Queen", "Rook", "Bishop", "Knight"};
+        b.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+                switch (which) {
+                    case 0:
+                        game.promote(activePiece, new Queen(isWhite, row, col));
+                        game.drawBoard();
+                        break;
+                    case 1:
+                        game.promote(activePiece, new Rook(isWhite, row, col));
+                        game.drawBoard();
+                        break;
+                    case 2:
+                        game.promote(activePiece, new Bishop(isWhite, row, col));
+                        game.drawBoard();
+                        break;
+                    case 3:
+                        game.promote(activePiece, new Knight(isWhite, row, col));
+                        game.drawBoard();
+                        break;
+                }
+
+            }
+
+        });
+
+        b.show();
     }
 
     private void resultDialog (String s) {

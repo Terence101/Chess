@@ -94,40 +94,49 @@ public class Game{
         this.white = new Player(true);
 
         this.white.getPieces().clear();
-        this.white.setKing(game.getWhite().getKing());
+
         this.white.setChecked(game.getWhite().isChecked());
 
         for(Piece p : game.getWhite().getPieces()){
             Piece p2 = copyPiece(p);
             this.white.getPieces().add(p2);
+            this.board.set(p2, p2.getRow(), p2.getCol());
+
+            if(p2 instanceof King){
+                this.getWhite().setKing((King) p2);
+            }
+
+            if(p == enpassantablePawn){
+                enpassantablePawn = p2;
+            }
             //this.board.set(p2, p2.getRow(), p2.getCol());
         }
 
         this.black = new Player(false);
 
         this.black.getPieces().clear();
-        this.black.setKing(game.getBlack().getKing());
         this.black.setChecked(game.getBlack().isChecked());
 
         for(Piece p : game.getBlack().getPieces()){
             Piece p2 = copyPiece(p);
             this.black.getPieces().add(p2);
+            this.board.set(p2, p2.getRow(), p2.getCol());
+
+            if(p2 instanceof King){
+                this.getBlack().setKing((King) p2);
+            }
+
+            if(p == enpassantablePawn){
+                enpassantablePawn = p2;
+            }
             //this.board.set(p2, p2.getRow(), p2.getCol());
         }
-
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                if(game.getBoard().get(i, j) != null) {
-                    this.board.set(copyPiece(game.getBoard().get(i, j)), i, j);
-                }
-            }
-        }
-
 
 
         this.gameOn = game.isGameOn();
         this.whiteTurn = game.isWhiteTurn();
         this.drawOffered = game.isDrawOffered();
+
     }
 
     private Piece copyPiece(Piece p){
@@ -333,85 +342,6 @@ public class Game{
 
 
     /**
-     * Called to start the game. Contains the game loop. Asks users for input and advances the game accordingly until the game ends.
-     */
-    public void start(){
-
-        String input;
-
-        while(gameOn){
-
-            boolean firstTry = true;
-
-            drawBoard();
-
-            do{
-
-                if(!firstTry)
-                    System.out.println("\nIllegal move, try again\n");
-
-                if(whiteTurn){
-                    if (white.isDefeated()) {
-                        System.out.println("Checkmate");
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("\nBlack Wins");
-
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.exit(0);
-                    }
-
-                    if(white.isChecked()){
-                        System.out.println("Check\n");
-                        white.setChecked(false);
-                    }
-                    System.out.print("White's move: ");
-                }else{
-                    if(black.isDefeated()){
-                        System.out.println("Checkmate");
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("\nWhite Wins");
-
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.exit(0);
-                    }
-                    if(black.isChecked()){
-                        System.out.println("Check\n");
-                        black.setChecked(false);
-                    }
-                    System.out.print("Black's move: ");
-                }
-
-                input = "";
-
-                firstTry = false;
-
-            }while(!takeTurn(input));
-
-            whiteTurn = !whiteTurn;
-
-
-
-        }
-
-    }
-
-    /**
      *
      * @param input The line from the scanner that the user inputs when it is their turn.
      * @return true if valid move is made. Otherwise prints illegal move message and prompts to try again.
@@ -562,88 +492,6 @@ public class Game{
                 enpassantablePawn = null;
             }
 
-
-
-            //check for default pawn promotion
-            if(count == 2 && pieceToMove instanceof Pawn){
-                if(((Pawn)pieceToMove).checkPromotion()){
-
-                    Queen queen = new Queen(whiteTurn, dstRow, dstCol);
-
-                    promote(pieceToMove, queen);
-                }
-
-            }
-
-            //for 3 tokens
-            if(count == 3){
-
-                String token = tokens[2];
-
-                //check for draw offered
-                if(token.equals("draw?")){
-                    drawOffered = true;
-                    return true;
-                }
-
-                //check for pawn promotion
-                if(pieceToMove instanceof Pawn){
-
-                    if(((Pawn)pieceToMove).checkPromotion()){
-
-                        Piece piece;
-
-                        switch(token){
-
-                            case "R":
-                                piece = new Rook(whiteTurn, dstRow, dstCol);
-                                break;
-
-                            case "B":
-                                piece = new Bishop(whiteTurn, dstRow, dstCol);
-                                break;
-
-                            case "Q":
-                                piece = new Queen(whiteTurn, dstRow, dstCol);
-                                break;
-
-                            case "N":
-                                piece = new Knight(whiteTurn, dstRow, dstCol);
-                                break;
-
-                            //third token is not any of the cases -- undo move and return false
-                            default:
-
-                                pieceToMove.move(board, srcRow, srcCol);
-                                board.set(temp, dstRow, dstCol);
-                                return false;
-
-
-                        }
-
-                        promote(pieceToMove, piece);
-
-                    }else{
-                        //if no pawn promotion and no draw offered, undo move and return false
-
-                        pieceToMove.move(board, srcRow, srcCol);
-                        board.set(temp, dstRow, dstCol);
-                        return false;
-                    }
-
-                }else{
-                    //if no pawn promotion and no draw offered, undo move and return false
-
-                    pieceToMove.move(board, srcRow, srcCol);
-                    board.set(temp, dstRow, dstCol);
-                    return false;
-                }
-
-
-
-
-
-            }
 
             //move made. If a piece was killed remove it from player list of pieces
             if(temp != null){
