@@ -10,8 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Switch;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 
 import app.Game;
 
@@ -19,7 +25,11 @@ public class RecordActivity extends AppCompatActivity {
 
 
     private ListView list;
+    private Switch sort;
     private static String s;
+    private String[] files;
+    private boolean sortByName;
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +38,23 @@ public class RecordActivity extends AppCompatActivity {
 
         initialize_list();
         s = null;
+
+        sort = (Switch) findViewById(R.id.sort);
+        sort.setText("Sort by Name");
+
+        sortByName = false;
     }
 
     private void initialize_list () {
         list = (ListView) findViewById(R.id.listview);
-        String[] files = fileList();
+        files = fileList();
+        files = Arrays.copyOfRange(files, 1, files.length);
 
         if (files == null)
             return;
 
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Arrays.copyOfRange(files, 1, files.length));
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,6 +64,44 @@ public class RecordActivity extends AppCompatActivity {
                 System.out.println(s);
             }
         });
+    }
+
+    public void switchSort(View v){
+        sortByName = !sortByName;
+
+        if(sortByName){
+            sortByName();
+        }else{
+            sortByDate();
+        }
+    }
+
+    private void sortByDate(){
+
+        String o1 = files[0];
+
+        String date1 = o1.substring(o1.lastIndexOf("\t") + 1);
+        System.out.println(date1);
+
+        /*
+        Arrays.sort(files, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+
+                String date1 = o1.substring(o1.lastIndexOf("/t"));
+
+            }
+        }
+        */
+    }
+
+    private void sortByName(){
+
+        Arrays.sort(files);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, files);
+        adapter.notifyDataSetChanged();
+        list.setAdapter(adapter);
+
     }
 
     private void openDialog(String s){
