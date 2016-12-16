@@ -497,7 +497,6 @@ public class PlayActivity extends AppCompatActivity {
 
         // Setting OK Button
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
-
             public void onClick(DialogInterface dialog,int which)
             {
                 alertDialog.dismiss();
@@ -673,13 +672,7 @@ public class PlayActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
 
-                Date date = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-                String formattedDate = sdf.format(date);
-
-                text[0] = title.getText().toString() + "\t\t\t\t\t\t\t" + formattedDate;
-                System.out.println(text[0]);
-
+                text[0] = title.getText().toString();
                 if (text[0] == null || text[0].equals("")) {
                     openDialog("Invalid Name");
 
@@ -688,14 +681,28 @@ public class PlayActivity extends AppCompatActivity {
                         public void run() {
                             save_game();;
                         }
-                    }, 5000);
+                    }, 3000);
 
                 } else {
+
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+                    String formattedDate = sdf.format(date);
+
+                    text[0] = text[0] + "\t\t\t\t\t\t\t" + formattedDate;
+                    System.out.println(text[0]);
+
                     System.out.println("writing to file");
                     writeTofile(text[0]);
-                }
 
-                finish();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            finish();
+                        }
+                    }, 2000);
+
+                }
             }
         });
 
