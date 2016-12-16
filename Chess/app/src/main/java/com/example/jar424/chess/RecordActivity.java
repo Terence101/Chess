@@ -139,7 +139,18 @@ public class RecordActivity extends AppCompatActivity {
 
     private void sortByName(){
 
-        Collections.sort(files);
+        Collections.sort(files, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                String temp1 = s1.substring(0, s1.indexOf("\t")).toLowerCase();
+                String temp2 = s2.substring(0, s2.indexOf("\t")).toLowerCase();
+
+                System.out.println(temp1);
+                System.out.println(temp2);
+
+                return temp1.compareTo(temp2);
+            }
+        });
 
     }
 

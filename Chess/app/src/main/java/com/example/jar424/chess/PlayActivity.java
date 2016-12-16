@@ -9,16 +9,13 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,6 +74,7 @@ public class PlayActivity extends AppCompatActivity {
         resign = (Button) findViewById(R.id.resign);
         draw = (Button) findViewById(R.id.draw);
 
+        undo.setEnabled(false);
         games = new ArrayList<Game>();
 
         game = new Game();
@@ -174,6 +172,7 @@ public class PlayActivity extends AppCompatActivity {
 
                             game.drawBoard();
                             game.setWhiteTurn(!game.isWhiteTurn());
+                            undo.setEnabled(true);
                             swapTurnBox();
 
                             games.add(g);
@@ -221,6 +220,7 @@ public class PlayActivity extends AppCompatActivity {
 
         if(buttonPressed == resign){
             //message.setText("resign");
+            System.out.println("Resign clicked");
             resign();
         }
 
@@ -255,10 +255,7 @@ public class PlayActivity extends AppCompatActivity {
 
         activeButton = null;
 
-
-
-
-
+        undo.setEnabled(false);
         checkForCheck();
         //System.out.println(games.size());
         //System.out.println(game.isWhiteTurn());
@@ -401,16 +398,13 @@ public class PlayActivity extends AppCompatActivity {
 
 
     private void resign () {
-        input = "resign";
 
-        if (game.takeTurn(input)) {
-
-            if (game.isWhiteTurn()) {
-                resultDialog("White resigns");
-            } else {
-                resultDialog("Black resigns");
-            }
+        if (game.isWhiteTurn()) {
+            resultDialog("White resigns");
+        } else {
+            resultDialog("Black resigns");
         }
+
     }
 
     private void draw () {
