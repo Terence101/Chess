@@ -81,135 +81,6 @@ public class PlayActivity extends AppCompatActivity {
 
         game = new Game();
         game.drawBoard();
-        //games.add(new Game(game));
-        //start();
-
-    }
-
-    private void start(){
-
-        while(game.isGameOn()){
-            boolean firstTry = true;
-
-            game.drawBoard();
-
-            do{
-
-                input = "";
-
-                if(!firstTry)
-                    message.setText("Illegal move");
-
-                if(game.isWhiteTurn()){
-                    while(input.split("\\s+").length < 2){
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //do nothing
-                    }
-
-
-                }else{
-
-                    while(input.split("\\s+").length < 2){
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //do nothing
-                    }
-
-                }
-
-                firstTry = false;
-
-            }while(!game.takeTurn(input));
-
-            game.setWhiteTurn(!game.isWhiteTurn());
-
-            swapTurnBox();
-        }
-
-        /*
-        public void start(){
-
-            String input;
-
-            while(gameOn){
-
-                boolean firstTry = true;
-
-                drawBoard();
-
-                do{
-
-                    if(!firstTry)
-                        System.out.println("\nIllegal move, try again\n");
-
-                    if(whiteTurn){
-                        if (white.isDefeated()) {
-                            System.out.println("Checkmate");
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println("\nBlack Wins");
-
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            System.exit(0);
-                        }
-
-                        if(white.isChecked()){
-                            System.out.println("Check\n");
-                            white.setChecked(false);
-                        }
-                        System.out.print("White's move: ");
-                    }else{
-                        if(black.isDefeated()){
-                            System.out.println("Checkmate");
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println("\nWhite Wins");
-
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            System.exit(0);
-                        }
-                        if(black.isChecked()){
-                            System.out.println("Check\n");
-                            black.setChecked(false);
-                        }
-                        System.out.print("Black's move: ");
-                    }
-
-                    input = "";
-
-                    firstTry = false;
-
-                }while(!takeTurn(input));
-
-                whiteTurn = !whiteTurn;
-
-
-
-            }
-
-        }
-        */
 
     }
 
@@ -253,9 +124,6 @@ public class PlayActivity extends AppCompatActivity {
 
                     Piece p = game.getBoard().get(row, col);
 
-                    if(p != null)
-                        System.out.println(p.getName() + "" + p.isWhite());
-
                     if(firstClick){
 
                         input = "";
@@ -272,7 +140,7 @@ public class PlayActivity extends AppCompatActivity {
 
                             input = input + (char) (col + 97);
                             input = input + (char) (row + 49) + " ";
-                            System.out.println("input: " + input);
+                            //System.out.println("input: " + input);
 
                         }
 
@@ -292,7 +160,7 @@ public class PlayActivity extends AppCompatActivity {
 
                         input = input + (char)(col + 97);
                         input = input + (char) (row + 49) + " ";
-                        System.out.println("input: " + input);
+                        //System.out.println("input: " + input);
 
                         Game g = new Game(game);
                         //g.drawBoardTerminal();
@@ -311,6 +179,8 @@ public class PlayActivity extends AppCompatActivity {
                             games.add(g);
 
                             checkForCheck();
+
+                            input = "";
 
                             activeButton.setColorFilter(null);
 
@@ -375,6 +245,18 @@ public class PlayActivity extends AppCompatActivity {
         game.drawBoard();
         swapTurnBox();
 
+        //reset stuff
+        firstClick = true;
+        input = "";
+        activePiece = null;
+
+        if(activeButton != null)
+            activeButton.setColorFilter(null);
+
+        activeButton = null;
+
+
+
 
 
         checkForCheck();
@@ -431,7 +313,16 @@ public class PlayActivity extends AppCompatActivity {
             promotionDialog();
         }
 
+        //reset stuff
+        input = "";
+        firstClick = true;
+
         activePiece = null;
+
+        if(activeButton != null)
+            activeButton.setColorFilter(null);
+
+        activeButton = null;
 
         game.drawBoard();
         game.setWhiteTurn(!game.isWhiteTurn());
