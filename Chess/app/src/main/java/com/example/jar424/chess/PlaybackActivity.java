@@ -73,7 +73,7 @@ public class PlaybackActivity extends AppCompatActivity {
             FileInputStream fis = openFileInput(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             moves = (ArrayList<Board>) ois.readObject();
-            System.out.println(moves.size());
+            //System.out.println(moves.size());
             ois.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class PlaybackActivity extends AppCompatActivity {
     }
 
     public void prev (View v) {
-        System.out.println("Previous Move Clicked");
+        //System.out.println("Previous Move Clicked");
 
         if (curr > 0) {
             nextButton.setEnabled(true);
@@ -92,7 +92,7 @@ public class PlaybackActivity extends AppCompatActivity {
                 prevButton.setEnabled(false);
             }
 
-            System.out.println(curr);
+            //System.out.println(curr);
             game.setBoard(moves.get(curr));
             game.playback_Board();
         }
@@ -100,7 +100,7 @@ public class PlaybackActivity extends AppCompatActivity {
     }
 
     public void next (View v) {
-        System.out.println("Next Move Clicked");
+        //System.out.println("Next Move Clicked");
 
         if (curr < moves.size() - 1 ) {
             prevButton.setEnabled(true);
@@ -110,7 +110,7 @@ public class PlaybackActivity extends AppCompatActivity {
                 nextButton.setEnabled(false);
             }
 
-            System.out.println(curr);
+            //System.out.println(curr);
             game.setBoard(moves.get(curr));
             game.playback_Board();
         }

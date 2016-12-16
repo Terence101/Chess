@@ -81,8 +81,6 @@ public class PlayActivity extends AppCompatActivity {
 
         game = new Game();
         game.drawBoard();
-        //games.add(new Game(game));
-        //start();
 
     }
 
@@ -126,9 +124,6 @@ public class PlayActivity extends AppCompatActivity {
 
                     Piece p = game.getBoard().get(row, col);
 
-                    if(p != null)
-                        System.out.println(p.getName() + "" + p.isWhite());
-
                     if(firstClick){
 
                         input = "";
@@ -145,7 +140,7 @@ public class PlayActivity extends AppCompatActivity {
 
                             input = input + (char) (col + 97);
                             input = input + (char) (row + 49) + " ";
-                            System.out.println("input: " + input);
+                            //System.out.println("input: " + input);
 
                         }
 
@@ -165,7 +160,7 @@ public class PlayActivity extends AppCompatActivity {
 
                         input = input + (char)(col + 97);
                         input = input + (char) (row + 49) + " ";
-                        System.out.println("input: " + input);
+                        //System.out.println("input: " + input);
 
                         Game g = new Game(game);
                         //g.drawBoardTerminal();

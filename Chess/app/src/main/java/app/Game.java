@@ -181,6 +181,7 @@ public class Game{
         //////////////////////////////////////////////////////////
 
         //draw board in terminal
+        /*
         System.out.println();
 
         for(int row = 7; row >= 0; row--){
@@ -208,6 +209,7 @@ public class Game{
         System.out.print(" a  b  c  d  e  f  g  h  \n");
 
         System.out.println();
+        */
     }
 
     public void drawBoardTerminal(){
@@ -263,6 +265,7 @@ public class Game{
         }
 
         //draw board in terminal
+        /*
         System.out.println();
 
         for(int row = 7; row >= 0; row--){
@@ -290,6 +293,7 @@ public class Game{
         System.out.print(" a  b  c  d  e  f  g  h  \n");
 
         System.out.println();
+        */
     }
 
 
@@ -352,37 +356,8 @@ public class Game{
 
         int count = tokens.length;
 
-        if(count == 1){
 
-            //game over -- resign
-            if(tokens[0].equals("resign")){
-
-                if(whiteTurn)
-                    System.out.println("\nBlack Wins");
-
-
-                else
-                    System.out.println("\nWhite Wins");
-
-                return true;
-            }
-
-            //game over -- draw
-            if(tokens[0].equals("draw") && drawOffered){
-
-                System.out.println("\nDraw");
-                try {
-                    Thread.sleep(2000);
-                    System.exit(0);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-
-            return false;
-
-        }else if(count == 2 || count == 3){
+        if(count == 2 || count == 3){
 
             //reset variable because draw is not completed if there is more than one token
             drawOffered = false;

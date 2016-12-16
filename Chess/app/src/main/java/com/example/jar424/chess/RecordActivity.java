@@ -158,7 +158,7 @@ public class RecordActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog,int which)
             {
-                System.out.println("Error acknowledged");
+                //System.out.println("Error acknowledged");
             }
         });
 
